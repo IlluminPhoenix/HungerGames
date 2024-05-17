@@ -7,6 +7,7 @@ import tk.shanebee.hg.data.Language;
 import tk.shanebee.hg.game.Game;
 import tk.shanebee.hg.util.Util;
 
+import java.util.Objects;
 import java.util.UUID;
 
 public class FreeRoamTask implements Runnable {
@@ -30,6 +31,10 @@ public class FreeRoamTask implements Runnable {
                 }
                 player.setHealth(20);
                 player.setFoodLevel(20);
+                if(!Objects.requireNonNull(game.getPlayerManager().getPlayerData(u)).getKitPicked()) {
+                    game.getKitManager().setRandomKit(player);
+                    Objects.requireNonNull(game.getPlayerManager().getPlayerData(u)).setKitPicked(false);
+                }
                 game.getGamePlayerData().unFreeze(player);
             }
         }

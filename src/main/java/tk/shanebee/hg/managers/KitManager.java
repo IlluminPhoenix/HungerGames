@@ -6,9 +6,7 @@ import tk.shanebee.hg.HG;
 import tk.shanebee.hg.util.Util;
 import tk.shanebee.hg.data.KitEntry;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 /**
  * General manager for kits
@@ -31,6 +29,13 @@ public class KitManager {
 		else {
 			kititems.get(kitName).setInventoryContent(player);
 		}
+	}
+
+	public void setRandomKit(Player player) {
+		Random rand = new Random();
+		int n = rand.nextInt(kititems.size());
+        List<String> list = new ArrayList<>(kititems.keySet());
+		setKit(player, list.get(n));
 	}
 
 	/** Get a list of kits in this KitManager

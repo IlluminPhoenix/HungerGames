@@ -145,6 +145,8 @@ public class Game {
         return gamePlayerData;
     }
 
+    public PlayerManager getPlayerManager() { return playerManager; }
+
     /**
      * Get an instance of the GameBlockData
      *
