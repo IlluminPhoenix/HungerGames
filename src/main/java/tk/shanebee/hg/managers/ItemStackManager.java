@@ -8,10 +8,7 @@ import org.bukkit.configuration.Configuration;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.inventory.meta.LeatherArmorMeta;
-import org.bukkit.inventory.meta.PotionMeta;
-import org.bukkit.inventory.meta.SkullMeta;
+import org.bukkit.inventory.meta.*;
 import org.bukkit.potion.PotionData;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -175,6 +172,17 @@ public class ItemStackManager {
             } else if (s.startsWith("ownerName:") && itemMeta instanceof SkullMeta) {
                 s = s.replace("ownerName:", "");
                 ((SkullMeta) itemMeta).setOwningPlayer(Bukkit.getOfflinePlayer(s));
+            } else if (s.startsWith("durability:")) {
+                s = s.replace("durability:", "");
+                try {
+                    int durability = Integer.parseInt(s);
+                    if (durability >= 0) {
+                        int damage = item.getType().getMaxDurability() - durability;
+                        ((Damageable) itemMeta).setDamage(damage);
+                    }
+                }
+                catch (NumberFormatException ignored) {}
+
             }
             item.setItemMeta(itemMeta);
         }

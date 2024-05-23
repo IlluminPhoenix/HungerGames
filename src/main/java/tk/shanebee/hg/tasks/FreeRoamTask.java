@@ -29,12 +29,12 @@ public class FreeRoamTask implements Runnable {
                 if (roamTime > 0) {
                     Util.scm(player, lang.roam_time.replace("<roam>", String.valueOf(roamTime)));
                 }
-                player.setHealth(20);
-                player.setFoodLevel(20);
                 if(!Objects.requireNonNull(game.getPlayerManager().getPlayerData(u)).getKitPicked()) {
                     game.getKitManager().setRandomKit(player);
                     Objects.requireNonNull(game.getPlayerManager().getPlayerData(u)).setKitPicked(false);
                 }
+                player.setHealth(20);
+                player.setFoodLevel(20);
                 game.getGamePlayerData().unFreeze(player);
             }
         }

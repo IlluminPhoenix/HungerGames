@@ -32,10 +32,13 @@ public class KitManager {
 	}
 
 	public void setRandomKit(Player player) {
-		Random rand = new Random();
-		int n = rand.nextInt(kititems.size());
-        List<String> list = new ArrayList<>(kititems.keySet());
-		setKit(player, list.get(n));
+		if(!kititems.isEmpty()) {
+			Random rand = new Random();
+			int n = rand.nextInt(kititems.size());
+			List<String> list = new ArrayList<>(kititems.keySet());
+			setKit(player, list.get(n));
+		}
+
 	}
 
 	/** Get a list of kits in this KitManager
