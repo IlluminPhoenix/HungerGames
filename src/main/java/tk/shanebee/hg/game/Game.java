@@ -260,7 +260,7 @@ public class Game {
         if (Config.borderEnabled && Config.borderOnStart) {
             gameBorderData.setBorder(gameArenaData.timer);
         }
-        timer = new TimerTask(this, gameArenaData.timer, gameBorderData.getCurrentborder());
+        timer = new TimerTask(this, gameArenaData.timer);
     }
 
     public void cancelTasks() {

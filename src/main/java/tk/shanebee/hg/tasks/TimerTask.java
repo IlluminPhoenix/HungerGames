@@ -23,9 +23,8 @@ public class TimerTask implements Runnable {
     private final String end_min;
     private final String end_minsec;
     private final String end_sec;
-	private final String border_name;
 
-	public TimerTask(Game g, int time, String border_name) {
+	public TimerTask(Game g, int time) {
 		this.remainingtime = time;
 		this.game = g;
 		HG plugin = game.getGameArenaData().getPlugin();
@@ -41,7 +40,6 @@ public class TimerTask implements Runnable {
 
 		this.id = Bukkit.getScheduler().scheduleSyncRepeatingTask(plugin, this, 0, 30 * 20L);
 
-		this.border_name = border_name;
 	}
 	
 	@Override
@@ -56,8 +54,7 @@ public class TimerTask implements Runnable {
 			game.getGameBorderData().setBorder(closingIn);
 			game.getGamePlayerData().msgAll(lang.game_border_closing
 					.replace("<seconds>", String.valueOf(closingIn))
-					.replace("<area>", border_name));
-
+					.replace("<area>", game.getGameBorderData().getCurrentBorder()));
 		}
 
 		if (gameArenaData.getChestRefillTime() > 0 && remainingtime == gameArenaData.getChestRefillTime()) {

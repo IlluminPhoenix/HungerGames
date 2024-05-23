@@ -66,7 +66,7 @@ public class GameBorderData extends Data {
     public List<Integer> getBorderTimer() {
         return Arrays.asList(borderCountdownStart, borderCountdownEnd);
     }
-    public String getCurrentborder() { return currentBorder; }
+    public String getCurrentBorder() { return currentBorder; }
 
     public void setBorder(int time) {
         Location center;
