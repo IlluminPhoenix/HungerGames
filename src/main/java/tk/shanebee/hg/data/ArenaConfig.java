@@ -14,6 +14,7 @@ import tk.shanebee.hg.*;
 import tk.shanebee.hg.game.Bound;
 import tk.shanebee.hg.game.Game;
 import tk.shanebee.hg.game.GameArenaData;
+import tk.shanebee.hg.game.GameBorderData;
 import tk.shanebee.hg.managers.KitManager;
 import tk.shanebee.hg.tasks.CompassTask;
 import tk.shanebee.hg.util.Util;
@@ -191,8 +192,10 @@ public class ArenaConfig {
 					}
 
 					if (arenadat.isSet(path + ".border.center")) {
-						Location borderCenter = getSLoc(arenadat.getString(path + ".border.center"));
-						game.getGameBorderData().setBorderCenter(borderCenter);
+						GameBorderData borderData = game.getGameBorderData();
+						for (String l : arenadat.getStringList(path + ".border.center")) {
+							borderData.addBorderCenter(getSLoc(l));
+						}
 					}
 					if (arenadat.isSet(path + ".border.size")) {
 						int borderSize = arenadat.getInt(path + ".border.size");

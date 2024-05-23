@@ -4,16 +4,19 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.WorldBorder;
 import tk.shanebee.hg.data.Config;
+import tk.shanebee.hg.util.Util;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Data class for holding a {@link Game Game's} world border
  */
 public class GameBorderData extends Data {
 
-    private Location borderCenter = null;
+    private List<Location> borderCenter = new ArrayList<>();
     private int borderSize;
     private int borderCountdownStart;
     private int borderCountdownEnd;
@@ -41,8 +44,8 @@ public class GameBorderData extends Data {
      *
      * @param borderCenter Location of the center
      */
-    public void setBorderCenter(Location borderCenter) {
-        this.borderCenter = borderCenter;
+    public void addBorderCenter(Location borderCenter) {
+        this.borderCenter.add(borderCenter);
     }
 
     /**
@@ -65,10 +68,12 @@ public class GameBorderData extends Data {
 
     public void setBorder(int time) {
         Location center;
-        if (Config.centerSpawn && borderCenter == null) {
+        if (Config.centerSpawn && borderCenter.isEmpty()) {
             center = game.gameArenaData.spawns.get(0);
-        } else if (borderCenter != null) {
-            center = borderCenter;
+        } else if (!borderCenter.isEmpty()) {
+            Random rand = new Random();
+            int index = rand.nextInt(borderCenter.size());
+            center = borderCenter.get(index);
         } else {
             center = game.gameArenaData.bound.getCenter();
         }
