@@ -3,8 +3,8 @@ package tk.shanebee.hg.game;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.WorldBorder;
+import org.javatuples.Pair;
 import tk.shanebee.hg.data.Config;
-import tk.shanebee.hg.util.Util;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,10 +16,11 @@ import java.util.Random;
  */
 public class GameBorderData extends Data {
 
-    private List<Location> borderCenter = new ArrayList<>();
+    private List<Pair<Location, String>> borderCenter = new ArrayList<>();
     private int borderSize;
     private int borderCountdownStart;
     private int borderCountdownEnd;
+    private String currentBorder = "undefined";
 
     protected GameBorderData(Game game) {
         super(game);
@@ -44,8 +45,8 @@ public class GameBorderData extends Data {
      *
      * @param borderCenter Location of the center
      */
-    public void addBorderCenter(Location borderCenter) {
-        this.borderCenter.add(borderCenter);
+    public void addBorderCenter(Location borderCenter, String name) {
+        this.borderCenter.add(new Pair<>(borderCenter, name));
     }
 
     /**
@@ -65,6 +66,7 @@ public class GameBorderData extends Data {
     public List<Integer> getBorderTimer() {
         return Arrays.asList(borderCountdownStart, borderCountdownEnd);
     }
+    public String getCurrentborder() { return currentBorder; }
 
     public void setBorder(int time) {
         Location center;
@@ -73,7 +75,9 @@ public class GameBorderData extends Data {
         } else if (!borderCenter.isEmpty()) {
             Random rand = new Random();
             int index = rand.nextInt(borderCenter.size());
-            center = borderCenter.get(index);
+            Pair<Location, String> pair = borderCenter.get(index);
+            center = pair.getValue0();
+            currentBorder = pair.getValue1();
         } else {
             center = game.gameArenaData.bound.getCenter();
         }

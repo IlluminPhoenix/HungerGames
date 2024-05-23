@@ -194,7 +194,13 @@ public class ArenaConfig {
 					if (arenadat.isSet(path + ".border.center")) {
 						GameBorderData borderData = game.getGameBorderData();
 						for (String l : arenadat.getStringList(path + ".border.center")) {
-							borderData.addBorderCenter(getSLoc(l));
+							String[] args = l.split(" ");
+							if (args.length == 1) {
+								borderData.addBorderCenter(getSLoc(args[0]), "Center");
+							}
+							else if(args.length == 2) {
+								borderData.addBorderCenter(getSLoc(args[0]), args[1].replace('_', ' '));
+							}
 						}
 					}
 					if (arenadat.isSet(path + ".border.size")) {

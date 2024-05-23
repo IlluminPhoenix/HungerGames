@@ -20,7 +20,7 @@ game-almost-over: '&l&cTDas Spiel ist fast vorbei, kämpft bis zum Tod!'
 game-ending-minsec: '&aDas Spiel endet in <minutes> Minute(n), und <seconds> Sekunde(n)!'
 game-ending-min: '&aDas Spiel endet in <minutes> Minute(n)!'
 game-ending-sec: '&aDas Spiel endet in <seconds> Sekunde(n)!'
-game-border-closing: '&6Die Border kommt, du hast <seconds> Sekunden, um in die Mitte der Arena zu kommen!'
+game-border-closing: '&6Die Border kommt, du hast <seconds> Sekunden, um nach &e&l<area> &6zu kommen!'
 game-chests-refill: '&6Die Truhen wurden aufgefüllt'
 
 # <min>/<sec> will be replaced with the remaining minutes and seconds in a game

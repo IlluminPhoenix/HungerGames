@@ -28,11 +28,11 @@ public class BorderCenterCmd extends BaseCmd {
 
 			Location l = player.getLocation();
 			assert l.getWorld() != null;
-			String loc = l.getWorld().getName() + ":" + l.getBlockX() + ":" + l.getBlockY() + ":" + l.getBlockZ();
+			String loc = l.getWorld().getName() + ":" + l.getBlockX() + ":" + l.getBlockY() + ":" + l.getBlockZ() + " Center";
 
 			prev_config.add(loc);
 			c.set("arenas." + name + ".border.center", prev_config);
-			game.getGameBorderData().addBorderCenter(l);
+			game.getGameBorderData().addBorderCenter(l, "Center");
 			arenaConfig.saveCustomConfig();
 
 			Util.scm(player, lang.cmd_border_center.replace("<arena>", name));
