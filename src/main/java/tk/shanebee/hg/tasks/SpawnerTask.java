@@ -43,11 +43,16 @@ public class SpawnerTask implements Runnable {
                 if (loc != null && game.getGameArenaData().isInRegion(loc)) {
                     MobEntry mobEntry;
                     if (isDay(world)) {
-                        mobEntry = dayMobs.get(random.nextInt(dayMobs.size()));
+                        if(!dayMobs.isEmpty()) {
+                            mobEntry = dayMobs.get(random.nextInt(dayMobs.size()));
+                            mobEntry.spawn(loc);
+                        }
                     } else {
-                        mobEntry = nightMobs.get(random.nextInt(nightMobs.size()));
+                        if(!nightMobs.isEmpty()) {
+                            mobEntry = nightMobs.get(random.nextInt(nightMobs.size()));
+                            mobEntry.spawn(loc);
+                        }
                     }
-                    mobEntry.spawn(loc);
                 }
             }
         }
