@@ -213,7 +213,7 @@ cmd-toggle-locked: '&3<arena>&b ist jetzt &4GESPERRT&b!'
 
 ## Handler
 cmd-handler-nokit: '&cDu kannst kein Kit auswählen, während das Spiel läuft!'
-cmd-handler-nocmd: '&cDu kannst keine Nicht-HungerGames-Befehle verwenden, während du in einem SPiel bist!'
+cmd-handler-nocmd: '&cDu kannst keine Nicht-HungerGames-Befehle verwenden, während du in einem Spiel bist!'
 cmd-handler-playing: '&cDieser Spieler spielt aktuell &3HungerGames!'
 
 ## Chest Refill
