@@ -22,6 +22,7 @@ import tk.shanebee.hg.util.Util;
 import tk.shanebee.hg.util.Vault;
 
 import java.util.*;
+import java.util.concurrent.CompletableFuture;
 
 /**
  * Data class for holding a {@link Game Game's} players
@@ -368,7 +369,7 @@ public class GamePlayerData extends Data {
         Location previousLocation = playerData.getPreviousLocation();
 
         playerData.restore(player);
-        exit(player, previousLocation);
+        exit(player, previousLocation, death);
         playerManager.removePlayerData(player);
         if (death) {
             player.playSound(player.getLocation(), Sound.UI_TOAST_CHALLENGE_COMPLETE, 5, 1);
@@ -376,7 +377,7 @@ public class GamePlayerData extends Data {
         game.updateAfterDeath(player, death);
     }
 
-    void exit(Player player, @Nullable Location exitLocation) {
+    void exit(Player player, @Nullable Location exitLocation, boolean asyncTeleport) {
         GameArenaData gameArenaData = game.getGameArenaData();
         player.setInvulnerable(false);
         if (gameArenaData.getStatus() == Status.RUNNING)
@@ -392,11 +393,13 @@ public class GamePlayerData extends Data {
             loc = bedLocation != null ? bedLocation : worldSpawn;
         }
         PlayerData playerData = playerManager.getData(player);
-        if (playerData == null || playerData.isOnline()) {
+
+        if (asyncTeleport) {
             PaperLib.teleportAsync(player, loc);
         } else {
-            PaperLib.teleportAsync(player, loc);
+            player.teleport(loc);
         }
+
     }
 
     /**
@@ -456,7 +459,7 @@ public class GamePlayerData extends Data {
         }
         if (Config.spectateHide)
             revealPlayer(spectator);
-        exit(spectator, previousLocation);
+        exit(spectator, previousLocation, true);
         playerManager.removeSpectatorData(uuid);
     }
 
