@@ -22,6 +22,7 @@ import tk.shanebee.hg.util.Util;
 import tk.shanebee.hg.util.Vault;
 
 import java.util.*;
+import java.util.concurrent.CompletableFuture;
 
 /**
  * Data class for holding a {@link Game Game's} players
